@@ -16,17 +16,56 @@
 ***********************************************************************************************/
 
 class Form{
-    constructor(){
-    console.log("Form element created");
+    constructor()
+    {
+        console.log("Form element created");
     }
-}
-class popperForm{
-    constructor(targetElement,noStyle,fields){
+    //initialise all the fields for the form and attach them as variables to the form object
+    initializeFields(formObject,fieldList)
+        {
+            for(var field of fieldList)
+            {
+            switch(field.toUpperCase())
+                {
+                    case "NUMBER":
+                    //NUMMBER Field
+                    console.log("here");
+                    formObject.field="here";
+                    break;
+                    case "DATE":
+                    //date field
+                    break;
+                    case "TEXT":
+                    //TEXT Field
+                    break;
+                    case "TEXTBOX":
+                    //Textbox field
+                    break;
+                    case "DROPDOWN":
+                    //DropDown Field
+                    break;
+                    case "DROPDOWN":
+                    //DropDown Field
+                    break;
+                }
+            }
+        }
+    }
+
+class popperForm
+{
+
+    constructor(targetElement,noStyle,fields)
+    {
         this.formContainer=targetElement;
         this.style=noStyle;
-        console.log(Object.values(fields));
+        console.log(Object.keys(fields));
+        var fieldList=Object.keys(fields);
+        (new Form()).initializeFields(this,fieldList);
     }
-}
+   
+  }
+
 class SimpleForm  extends Form{
 
 }
