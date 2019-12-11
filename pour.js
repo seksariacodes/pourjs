@@ -17,11 +17,11 @@
 
 class Form{
     constructor()
-    {
-        console.log("Form element created");
-    }
+        {
+            console.log("Form element created");
+        }
     //initialise all the fields for the form and attach them as variables to the form object
-    initializeFields(formObject,fieldList)
+    initializeFields(fieldList)
         {
             for(var field of fieldList)
             {
@@ -30,7 +30,7 @@ class Form{
                     case "NUMBER":
                     //NUMMBER Field
                     console.log("here");
-                    formObject.field="here";
+                    //field="here";
                     break;
                     case "DATE":
                     //date field
@@ -50,18 +50,30 @@ class Form{
                 }
             }
         }
+    generateHTML(formAction)
+        {
+            var html='<form class="'+new Date().getTime()+'" action="'+formAction+'">'
+            html=html+'</form>';
+            return html;
+        }
     }
 
-class popperForm
+class popperForm extends Form
 {
 
-    constructor(targetElement,noStyle,fields)
+    constructor(targetElement,noStyle,fields,formAction)
     {
+        super();
         this.formContainer=targetElement;
         this.style=noStyle;
         console.log(Object.keys(fields));
         var fieldList=Object.keys(fields);
-        (new Form()).initializeFields(this,fieldList);
+        (new Form()).initializeFields(fieldList);
+        this.formAction=formAction;
+    }
+    generateHTML()
+    {
+        return (super.generateHTML(this.formAction));
     }
    
   }
@@ -77,7 +89,7 @@ class tabedForm extends Form{
 }
 
 class pour{
-    constructor(formType,targetElement,noStyle,fields){
-        if(formType=='Popper Form') return new popperForm(targetElement,noStyle,fields);
+    constructor(formType,targetElement,noStyle,fields,formAction){
+        if(formType=='Popper Form') return new popperForm(targetElement,noStyle,fields,formAction);
     }
 }
