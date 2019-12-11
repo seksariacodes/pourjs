@@ -23,6 +23,7 @@ class Form{
     //initialise all the fields for the form and attach them as variables to the form object
     initializeFields(fieldList)
         {
+            var fieldArray=[]
             for(var field of fieldList)
             {
             switch(field.toUpperCase())
@@ -49,11 +50,16 @@ class Form{
                     break;
                 }
             }
+        return fieldArray;
         }
     generateHTML(formAction)
         {
             var html='<form class="'+new Date().getTime()+'" action="'+formAction+'">'
             html=html+'</form>';
+            for(var field of fieldList)
+            {
+                // filed.getHTML example -> numberInput.getHTML()
+            }
             return html;
         }
     }
@@ -66,9 +72,8 @@ class popperForm extends Form
         super();
         this.formContainer=targetElement;
         this.style=noStyle;
-        console.log(Object.keys(fields));
         var fieldList=Object.keys(fields);
-        (new Form()).initializeFields(fieldList);
+        this.fieldList=super.initializeFields(fieldList);
         this.formAction=formAction;
     }
     generateHTML()
@@ -93,3 +98,4 @@ class pour{
         if(formType=='Popper Form') return new popperForm(targetElement,noStyle,fields,formAction);
     }
 }
+
