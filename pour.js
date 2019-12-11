@@ -55,16 +55,18 @@ class Form{
     generateHTML(formAction)
         {
             var html='<form class="'+new Date().getTime()+'" action="'+formAction+'">'
+            html=html+(new ButtonFactory('Submit')).buttonHtml;
             html=html+'</form>';
-            for(var field of fieldList)
+            /*for(var field of fieldList)
             {
                 // filed.getHTML example -> numberInput.getHTML()
-            }
+            }*/
+            
             return html;
         }
     }
 
-class popperForm extends Form
+class PopperForm extends Form
 {
 
     constructor(targetElement,noStyle,fields,formAction)
@@ -86,16 +88,36 @@ class popperForm extends Form
 class SimpleForm  extends Form{
 
 }
-class modalForm  extends Form{
+class ModalForm  extends Form{
 
 }
-class tabedForm extends Form{
+class TabedForm extends Form{
 
 }
 
-class pour{
+class Pour{
     constructor(formType,targetElement,noStyle,fields,formAction){
-        if(formType=='Popper Form') return new popperForm(targetElement,noStyle,fields,formAction);
+        if(formType=='Popper Form') return new PopperForm(targetElement,noStyle,fields,formAction);
     }
 }
-
+class Button
+{
+    constructor(){
+        
+    }
+}
+class SubmitButton extends Button
+{
+    constructor()
+    {
+        super();
+        this.buttonHtml='<button type="submit"></button>';
+    }
+}
+class ButtonFactory
+{
+    constructor(buttonType)
+    {
+        if(buttonType=='Submit') return new SubmitButton();
+    }
+}
